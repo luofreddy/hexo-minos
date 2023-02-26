@@ -49,17 +49,6 @@ function patchCodeHighlight(content) {
 hexo.extend.filter.register('after_post_render', function (data) {
     data.content = data.content ? patchCodeHighlight(data.content) : data.content;
     data.excerpt = data.excerpt ? patchCodeHighlight(data.excerpt) : data.excerpt;
-    
-    data.excerpt += '<!-- more -->';
 
-    // 抓出第一段字當作摘要
-    const startP = data.excerpt.indexOf('<p>');
-    const endP = data.excerpt.indexOf('</p>');
-    if(startP == -1 || endP == -1) {
-        return data
-    }
-
-    data.excerpt = `<p>${data.excerpt.substring(startP + 3, endP)}</p>`;
-    
     return data;
 });
